@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet" href="arcadecss1.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+</head>
+<body>
+    <!-- game header -->
+    <div class="header">
+        <h1>CLASSIC ARCADE GAME</h1>
+    </div>
+
+    <!-- dark overlay -->
+    <div class="overlay"></div>
+
+    <!-- modal for starting the game -->
+    <div class="start-game">
+        <h1>Welcome to Frogger Game</h1>
+        <h3>Instructions</h3>
+        <p>Use your arrow keys to move the player: up, down, left, right.</p>
+        <h3>Challenge</h3>
+        <p>Player must cross the brick road towards the water at the top without hitting a bug and gain 5 hearts to win the game.</p>
+        <h4>You have 3 lives. Good luck!</h4>
+        <button onclick="startGame()"> Play Now! </button>
+    </div>
+
+    <!-- modal for when player looses all lives -->
+    <div class="game-over">
+        <h1>Game Over</h1>
+        <p>Sorry You Ran Out of Lives</p>
+        <h3>Play Again to Win!</h3>
+        <button onclick="resetGame()"> Play Again </button>
+    </div>
+
+    <!-- Modal for when player wins the game -->
+    <div class="winner">
+        <h1>You're a Winner! 🎉 🎉 </h1>
+        <p>You dodged the bugs!Excellent Job!</p>
+        <button onclick="resetGame()"> Play Again </button>
+    </div>
+
+    <!-- all javascript -->
+    <script src="resources1.js"></script>
+    <script src="arcadeapp1.js"></script>
+    <script src="engine1.js"></script>
+</body>
+</html>
