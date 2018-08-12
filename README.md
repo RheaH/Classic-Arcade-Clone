@@ -16,6 +16,7 @@ How to PLay
 Player controls the hero character by using the main keyboard keys: [ ← → ↑ ↓ ] arrow keys on their keyboard. There is no press down and hold option, you must press each key to move in that specific direction.
 
 Resources
+
 Frogger. (2018, August 10). Retrieved from https://en.wikipedia.org/wiki/Frogger
 Arcade Game Walkthrough Part 1 – Starter Code Breakdown. (2018, July 03). Retrieved from https://matthewcranford.com/arcade-game-walkthrough-part-1-starter-code-breakdown/
 (n.d.). W3Schools Online Web Tutorials. How To Make a Modal Box With CSS and JavaScript. Retrieved from http://www.w3schools.com/howto/howto_css_modals.asp
