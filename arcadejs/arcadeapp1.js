@@ -1,20 +1,17 @@
 // declaring important variable of different modales
-let modal = document.querySelector(".start-game");
-let overlay = document.querySelector(".overlay");
-let gameover = document.querySelector(".game-over");
-let winnerModal = document.querySelector(".winner");
+const modal = document.querySelector('.start-game');
+const overlay = document.querySelector('.overlay');
+const gameover = document.querySelector('.game-over');
+const winnerModal = document.querySelector('.winner');
 
-// points and player lives
-var playerPoints = 0;
-var playerLives = 3;
-
+"use strict";
 //this function starts the game
 function startGame(){
     modal.classList.add("hide");
     overlay.classList.add("hide");
 
     // Initial figures
-    playerPoints = 0;
+    player.playerPoints = 0;
 }
 
 //this is run when player loses all lives
@@ -31,18 +28,18 @@ function resetGame(){
 // funtion runs to check lives
 function checkLives(){
     if (alllives.length === 0){
-        gameOver()
+        gameOver();
     }
 }
 
-// function for when player gets all 5 keys and wins game
+// function for when player gets all 5 hearts and wins game
 function youWin(){
     overlay.classList.add("show");
     winnerModal.classList.add("show");
 }
 
 // Enemies class
-var Enemy = function(x, y, speed = 1) {
+let Enemy = function(x, y, speed = 1) {
     // Variables applied to each of our instances go here,
     this.x = x;
     this.y = y;
@@ -59,13 +56,13 @@ Enemy.prototype.update = function(dt) {
     this.x += 100 * this.speed * dt;
 
     // collison detection
-    if (parseInt(this.x)+ 100 >= playerX && parseInt(this.x) <= playerX + 40 && this.y === playerY){
-        console.log("a collision just occured your player diessss");
+    if (this.x + 100 >= player.x && this.x <= player.x + 100 &&
+    this.y + 65 >= player.y && this.y <= player.y + 65){
         player.reset();
         alllives.pop();
-        playerLives -= 1
-        if (playerPoints >= 50){
-            playerPoints -= 50;
+        this.playerLives -= 1;
+        if (player.playerPoints >= 50){
+            player.playerPoints -= 50;
         }
     }
     checkLives();
@@ -78,13 +75,15 @@ Enemy.prototype.render = function() {
 
 
 // player class
-var Player = function (x, y){
+let Player = function (x, y){
     this.x = x;
     this.y = y;
     this.sprite = 'arcadeimages/char-horn-girl.png';
+    this.playerPoints = 0;
+    this.playerLives = 3;
 };
-var playerX
-var playerY
+let playerX;
+let playerY;
 
 Player.prototype.update = function(){
     playerX = this.x;
@@ -105,10 +104,10 @@ Player.prototype.handleInput = function(pressedKeys){
         this.y -= 80;
     }
     else if (pressedKeys === 'right' && this.x < 400){
-        this.x += 100
+        this.x += 100;
     }
     else if (pressedKeys === 'down' && this.y < 380){
-        this.y += 80
+        this.y += 80;
     }
 };
 // to reset player to original position
@@ -118,9 +117,9 @@ Player.prototype.reset = function(){
 }
 
 // Lives class
-var Lives = function(x, y){
+let Lives = function(x, y){
     this.x = x;
-    this.y = y
+    this.y = y;
     this.sprite = 'arcadeimages/Star.png';
 };
 // render method for Lives class
@@ -129,7 +128,7 @@ Lives.prototype.render = function(){
 }
 
 // Key class
-var Key = function(x, y){
+let Key = function(x, y){
     this.x = x;
     this.y = y;
     this.sprite = 'arcadeimages/Heart.png';
@@ -141,20 +140,20 @@ Key.prototype.render = function(){
 
 
 //winning block class to figure out when a player wins
-var Winblock = function(x, y){
+let Winblock = function(x, y){
     this.x = x;
-    this.y = y
+    this.y = y;
 }
 
-var winblockX
-var winblockY
+let winblockX;
+let winblockY;
 Winblock.prototype.update = function(){
     winblockX = this.x;
     winblockY = this.y;
 
     if((-Math.abs(winblockY)) == playerY && this.x == playerX){
         allKeys.push(new Key(winblockX, winblockY));
-        playerPoints += 100;
+        player.playerPoints += 100;
         player.reset();
     }
     if (allKeys.length == 5){
@@ -164,28 +163,28 @@ Winblock.prototype.update = function(){
 }
 
 // class to give player points
-var Points = function(x, y, score){
+let Points = function(x, y, score){
     this.x = x;
     this.y = y;
-    this.score = "Your points: "+ playerPoints
+    this.score = "Your points: "+ player.playerPoints;
 }
 Points.prototype.render = function(){
     ctx.font = '20px serif';
     ctx.fillText(this.score, this.x, this.y);
 }
 Points.prototype.update = function(){
-    this.score = "Your points: "+ playerPoints
+    this.score = "Your points: "+ player.playerPoints;
 }
 
 // possible X-axis positions on board
-var columns = [ -5, -100, -200, -300, -400];
-var enemyX;
+let columns = [ -5, -100, -200, -300, -400];
+let enemyX;
 
 // possible Y-axis positions on board
-var rows = [ 60, 140, 220];
-var enemyY;
+let rows = [ 60, 140, 220];
+let enemyY;
 
-var enemySpeed;
+let enemySpeed;
 
 // this is to randomly pick locations for bugs
 setInterval(function instances(){
@@ -199,26 +198,26 @@ setInterval(function instances(){
 
 // Now instantiate your objects.
 // allEnemies- array of all enemy objects
-var allEnemies = [ new Enemy(-8, 60, 3), new Enemy(0, 140, 10), new Enemy(-5, 300, 15)];
+let allEnemies = [ new Enemy(-8, 60, 3), new Enemy(0, 140, 10), new Enemy(-5, 300, 15)];
 
 // Place the player object in a variable called player
-var player = new Player( 200, 380);
+let player = new Player( 200, 380);
 
 // instantiate lives
-var alllives = [ new Lives(10, 540), new Lives(40, 540), new Lives(70, 540)];
+let alllives = [ new Lives(10, 540), new Lives(40, 540), new Lives(70, 540)];
 
-var allKeys = [ ];
+let allKeys = [ ];
 
 // instantiate winning blocks
-var winningblocks = [ new Winblock(0, 20), new Winblock(100, 20), new Winblock(200, 20), new Winblock(300, 20), new Winblock(400, 20)];
+let winningblocks = [ new Winblock(0, 20), new Winblock(100, 20), new Winblock(200, 20), new Winblock(300, 20), new Winblock(400, 20)];
 
-var points = new Points(350, 570)
+let points = new Points(350, 570);
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    let allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
@@ -227,3 +226,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
