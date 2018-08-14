@@ -16,8 +16,11 @@ Getting Started
 To be able to play, all you need to do is complete a few steps.
 
 1.Download the project files from this github repo. They will download as a zip folder.
+
 2.Unzip (or extract) the folder.
+
 3.Load the index.html file in your web browser.
+
 4.Start playing!
 
 How to PLay
